@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Boats from "./components/Boats";
+import Grille from "./components/Grille";
 
 class App extends Component {
     constructor() {
@@ -8,7 +8,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <h1>bataille navale</h1>
+                <Grille />
             </div>
         );
     }
