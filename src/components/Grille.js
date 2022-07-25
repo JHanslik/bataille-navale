@@ -19,3 +19,14 @@ export default class Grille extends Component {
         )
       }
     }
+    export class FlotteGrille extends Component {
+        render() {
+          return (<Grille {...this.props} noBg={false} />);
+        }
+      }
+      
+      export class RadarGrille extends Component {
+        render() {
+          return (<Grille {...this.props} noBg={true}/>);
+        }
+      }
