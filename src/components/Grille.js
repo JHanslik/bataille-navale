@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Case from './Case';
 
 export default class Grille extends Component {
     render() {
@@ -8,7 +9,9 @@ export default class Grille extends Component {
         for(var i=0;i<this.props.cases.length;i++) {
              arrayGrid[i] = [];
             for(var j=0;j<this.props.cases[i].length;j++) {
-                 arrayGrid[i][j] = <Case x={i} y={j} {...this.props.cases[i][j]} {...this.props} />;
+                 arrayGrid[i][j] = 
+                 
+                 <Case x={i} y={j} {...this.props.cases[i][j]} {...this.props} />;
             }
         }
         return (
@@ -19,14 +22,4 @@ export default class Grille extends Component {
         )
       }
     }
-    export class FlotteGrille extends Component {
-        render() {
-          return (<Grille {...this.props} noBg={false} />);
-        }
-      }
-      
-      export class RadarGrille extends Component {
-        render() {
-          return (<Grille {...this.props} noBg={true}/>);
-        }
-      }
+    
