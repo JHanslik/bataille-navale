@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import Grille from './components/Grille';
 
 class App extends Component {
     render() {
         return (
             <div>
-                <h1>bataille navale</h1>
+                <Grille/>
             </div>
         );
     }
