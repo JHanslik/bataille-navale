@@ -4,7 +4,7 @@ class Start extends Component {
     render() {
         return (
             <div>
-                <button className='button' onClick={this.props.startPlacement}>Start</button>
+                <button className='green-button' onClick={this.props.startGame}>Start</button>
             </div>
         );
     }
