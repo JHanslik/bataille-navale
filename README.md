@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# bataille-navale
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A . Règles du jeu :
 
-## Available Scripts
+-   2 joueurs : Player 1 et IA
 
-In the project directory, you can run:
+-   5 bateaux :
 
-### `npm start`
+    -   1 porte avion : 5 cases
+    -   1 croiseur : 4 cases
+    -   1 contre torpilleur : 3 cases
+    -   1 sous-marin : 3 cases
+    -   1 torpilleur : 2 cases
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+-   Grille de jeu :
+    -   10x10 pour chaque joueur
+        -   1 à 10 horizontal
+        -   A à J vertical
+-   Phase de placement :
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+    -   Chaque joueur place ses bateaux sans qu'ils puissent se chevaucher.
 
-### `npm test`
+-   En jeu :
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    -   Chaque joueur joue chacun son tour en choisissant une case à attaquer.
+    -   Si il y a un bateau : BOOM (Touché ou Coulé si toute les cases du bateau sont touchées), sinon Plouf
+    -   Score :
+        -   Chaque joueur démarre à 5 bateaux etpour chaque bateau détruit perd une vie.
+        -   le premier à 0 perd.
+    -   Quand un joueur arrive à 0, annoncement du vainqueur + bouton "New Game".
 
-### `npm run build`
+-   Definition of Done :
+    -   minimum :
+        -   Grille s'affiche,
+        -   Quand le placement et la phase de jeu peuvent être accomplis.
+    -   Bonus :
+        -   Drag and drop les ships
+        -   Style / animations
+        -   Faire en sorte de garder l'historique des parties en local storage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![image](https://i.pinimg.com/originals/25/3c/88/253c88d7a9750f6b9cb68d8f49a4b400.gif)
