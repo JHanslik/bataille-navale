@@ -21,11 +21,10 @@ body {
 
 header {
   background-color: #2f74b4;
-  height: 80px;
   border-bottom: 5px solid #184d7e;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
   color: white;
 }
 

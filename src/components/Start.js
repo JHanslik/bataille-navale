@@ -1,16 +1,17 @@
 import React, { Component } from "react"
 import "../App.css"
 
-
-
 class Start extends Component {
   render() {
     return (
       <div>
-        <header>
-          <h1>Warship</h1>
-        </header>
-        <button id="start-game-button" className="green-button mx-auto" onClick={this.props.startStatus}>Start</button>
+        <button
+          id="start-game-button"
+          className="green-button mx-auto"
+          onClick={this.props.startStatus}
+        >
+          Start
+        </button>
       </div>
     )
   }
