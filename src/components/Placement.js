@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import Grille from "./Grille"
-import "../style/placement.css"
+import "../App.css"
 
 
 
