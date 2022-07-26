@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import lodash from "lodash"
 
 class Grille extends Component {
   constructor() {
@@ -7,10 +8,32 @@ class Grille extends Component {
     this.state = {
       arrayGridX: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       arrayGridY: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-      boat: [
-        [2, "B"],
-        [2, "C"],
-        [2, "D"],
+      patrolBoat: [
+        [1, "A"],
+        [2, "A"],
+      ],
+      submarine: [
+        [3, "B"],
+        [3, "C"],
+        [3, "D"],
+      ],
+      destroyer: [
+        [5, "F"],
+        [6, "F"],
+        [7, "F"],
+      ],
+      battleship: [
+        [10, "A"],
+        [10, "B"],
+        [10, "C"],
+        [10, "D"],
+      ],
+      carrier: [
+        [1, "J"],
+        [2, "J"],
+        [3, "J"],
+        [4, "J"],
+        [5, "J"],
       ],
     }
   }
@@ -18,12 +41,20 @@ class Grille extends Component {
     console.log(x, y)
   }
 
-  isFilled = (position) => {
-    console.log(position)
-    return this.state.boat.find((presence) => {
-      console.log(presence)
-      return presence === position
-    })
+  isFilledPatrolBoat = (position) => {
+    return lodash.find(this.state.patrolBoat, position)
+  }
+  isFilledSubmarine = (position) => {
+    return lodash.find(this.state.submarine, position)
+  }
+  isFilledDestroyer = (position) => {
+    return lodash.find(this.state.destroyer, position)
+  }
+  isFilledBattleship = (position) => {
+    return lodash.find(this.state.battleship, position)
+  }
+  isFilledCarrier = (position) => {
+    return lodash.find(this.state.carrier, position)
   }
 
   render() {
@@ -35,7 +66,9 @@ class Grille extends Component {
               {this.state.arrayGridY.map((y) => {
                 return (
                   <div
-                    className={`square ${this.isFilled([x, y]) && "filled"}`}
+                    className={`square ${
+                      this.isFilledPatrolBoat([x, y]) && "filled"
+                    }`}
                     onClick={() => {
                       this.handleClick(x, y)
                     }}
