@@ -106,51 +106,6 @@ class Grille extends Component {
             </div>
           )
         })}
-        <button
-          type="button"
-          value="patrolBoat"
-          onClick={(e) => {
-            this.boatSelection(e)
-          }}
-        >
-          Patrol Boat
-        </button>
-        <button
-          type="button"
-          value="submarine"
-          onClick={(e) => {
-            this.boatSelection(e)
-          }}
-        >
-          Submarine
-        </button>
-        <button
-          type="button"
-          value="destroyer"
-          onClick={(e) => {
-            this.boatSelection(e)
-          }}
-        >
-          Destroyer
-        </button>
-        <button
-          type="button"
-          value="battleship"
-          onClick={(e) => {
-            this.boatSelection(e)
-          }}
-        >
-          Battleship
-        </button>
-        <button
-          type="button"
-          value="carrier"
-          onClick={(e) => {
-            this.boatSelection(e)
-          }}
-        >
-          Carrier
-        </button>
       </div>
     )
   }
