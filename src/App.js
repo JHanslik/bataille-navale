@@ -29,6 +29,7 @@ placementDone = () => {
     
     return (
       <div>
+        <Header/>
         {this.state.status === "start" && <Start startStatus={this.gameStart}/>}
         {this.state.status === "placement" && <Placement placementDone={this.placementDone}/>}
       </div>
