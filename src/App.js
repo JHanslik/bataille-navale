@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import Start from "./components/Start"
 import Placement from "./components/Placement"
+import Header from "./components/Header"
 import "./App.css"
 
 
