@@ -13,7 +13,7 @@ class Grille extends Component {
       destroyer: [],
       battleship: [],
       carrier: [],
-      locked: false
+      locked: false,
     }
   }
   handleClickPatrolBoat = (x, y) => {
@@ -47,8 +47,8 @@ class Grille extends Component {
       }
     }
     if (this.state.patrolBoat.length === 2) {
-      this.setState ({
-        locked:false
+      this.setState({
+        locked: false,
       })
     }
   }
@@ -83,8 +83,8 @@ class Grille extends Component {
       }
     }
     if (this.state.submarine.length === 3) {
-      this.setState ({
-        locked:false
+      this.setState({
+        locked: false,
       })
     }
   }
@@ -119,8 +119,8 @@ class Grille extends Component {
       }
     }
     if (this.state.destroyer.length === 3) {
-      this.setState ({
-        locked:false
+      this.setState({
+        locked: false,
       })
     }
   }
@@ -155,8 +155,8 @@ class Grille extends Component {
       }
     }
     if (this.state.battleship.length === 4) {
-      this.setState ({
-        locked:false
+      this.setState({
+        locked: false,
       })
     }
   }
@@ -191,8 +191,8 @@ class Grille extends Component {
       }
     }
     if (this.state.carrier.length === 5) {
-      this.setState ({
-        locked:false
+      this.setState({
+        locked: false,
       })
     }
   }
@@ -206,7 +206,7 @@ class Grille extends Component {
     } else if (e.target.value === "submarine" && !this.state.locked) {
       this.setState({
         boatSelected: "submarine",
-        locked: true
+        locked: true,
       })
     } else if (e.target.value === "destroyer" && !this.state.locked) {
       this.setState({
@@ -279,7 +279,7 @@ class Grille extends Component {
   }
 
   render() {
-    console.log (this.state.direction)
+    console.log(this.state.direction)
     console.log(this.state.boatSelected)
     // console.log(this.state.patrolBoat)
     // console.log(this.state.submarine)
