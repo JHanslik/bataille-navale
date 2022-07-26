@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import Grille from "./components/Grille"
 import Start from "./components/Start"
 import Placement from "./components/Placement"
 import "./App.css"
