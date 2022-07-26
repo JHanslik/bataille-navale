@@ -7,7 +7,7 @@ class Grille extends Component {
     this.state = {
       arrayGrid: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
       boatSelected: "",
-      direction: "Horizontal",
+      direction: "Vertical",
       patrolBoat: [],
       submarine: [],
       destroyer: [],
@@ -35,7 +35,7 @@ class Grille extends Component {
         })
       } else if (
         this.state.direction === "Vertical" &&
-        clonedPatrolBoat[0].charAt(0) === `${y}` &&
+        clonedPatrolBoat[0].charAt(1) === `${y}` &&
         (this.isFilledPatrolBoat(`${x - 1}${y}`) ||
           this.isFilledPatrolBoat(`${x + 1}${y}`))
       ) {
@@ -66,7 +66,7 @@ class Grille extends Component {
         })
       } else if (
         this.state.direction === "Vertical" &&
-        clonedSubmarine[0].charAt(0) === `${y}` &&
+        clonedSubmarine[0].charAt(1) === `${y}` &&
         (this.isFilledSubmarine(`${x - 1}${y}`) ||
           this.isFilledSubmarine(`${x + 1}${y}`))
       ) {
@@ -97,7 +97,7 @@ class Grille extends Component {
         })
       } else if (
         this.state.direction === "Vertical" &&
-        clonedDestroyer[0].charAt(0) === `${y}` &&
+        clonedDestroyer[0].charAt(1) === `${y}` &&
         (this.isFilledDestroyer(`${x - 1}${y}`) ||
           this.isFilledDestroyer(`${x + 1}${y}`))
       ) {
@@ -128,7 +128,7 @@ class Grille extends Component {
         })
       } else if (
         this.state.direction === "Vertical" &&
-        clonedBattleship[0].charAt(0) === `${y}` &&
+        clonedBattleship[0].charAt(1) === `${y}` &&
         (this.isFilledBattleship(`${x - 1}${y}`) ||
           this.isFilledBattleship(`${x + 1}${y}`))
       ) {
@@ -143,6 +143,7 @@ class Grille extends Component {
     let clonedCarrier = [...this.state.carrier]
     if (clonedCarrier.length < 5 && !this.isFilledCarrier(`${x}${y}`)) {
       if (clonedCarrier.length === 0) {
+        console.log("premier bloc")
         clonedCarrier.push(`${x}${y}`)
         this.setState({
           carrier: clonedCarrier,
@@ -153,16 +154,18 @@ class Grille extends Component {
         (this.isFilledCarrier(`${x}${y - 1}`) ||
           this.isFilledCarrier(`${x}${y + 1}`))
       ) {
+        console.log("horizontal")
         clonedCarrier.push(`${x}${y}`)
         this.setState({
           carrier: clonedCarrier,
         })
       } else if (
         this.state.direction === "Vertical" &&
-        clonedCarrier[0].charAt(0) === `${y}` &&
+        clonedCarrier[0].charAt(1) === `${y}` &&
         (this.isFilledCarrier(`${x - 1}${y}`) ||
           this.isFilledCarrier(`${x + 1}${y}`))
       ) {
+        console.log("vertical")
         clonedCarrier.push(`${x}${y}`)
         this.setState({
           carrier: clonedCarrier,
@@ -209,7 +212,7 @@ class Grille extends Component {
     }
   }
 
-  placementDirection = async () => {
+  placementDirection = () => {
     if (this.state.direction === "Horizontal") {
       this.setState({
         direction: "Vertical",
@@ -254,7 +257,7 @@ class Grille extends Component {
     // console.log(this.state.battleship)
     // console.log(this.state.carrier)
     return (
-      <div>
+      <div className="d-flex flex-column align-items-center">
         {this.state.arrayGrid.map((x) => {
           return (
             <div className="d-flex">
@@ -265,7 +268,7 @@ class Grille extends Component {
                       this.isFilled(`${x}${y}`) && "filled"
                     }`}
                     onClick={() => {
-                      this.handleClickCarrier(x, y)
+                      this.handleClick(x, y)
                     }}
                   ></div>
                 )
@@ -275,7 +278,7 @@ class Grille extends Component {
         })}
         <button
           id="rotate-button"
-          className="mx-auto"
+          className="mx-auto m-3"
           onClick={this.placementDirection}
         >
           {this.state.direction}
@@ -284,6 +287,7 @@ class Grille extends Component {
           <button
             type="button"
             value="patrolBoat"
+            className="m-2"
             onClick={(e) => {
               this.boatSelection(e)
             }}
@@ -293,6 +297,7 @@ class Grille extends Component {
           <button
             type="button"
             value="submarine"
+            className="m-2"
             onClick={(e) => {
               this.boatSelection(e)
             }}
@@ -302,6 +307,7 @@ class Grille extends Component {
           <button
             type="button"
             value="destroyer"
+            className="m-2"
             onClick={(e) => {
               this.boatSelection(e)
             }}
@@ -311,6 +317,7 @@ class Grille extends Component {
           <button
             type="button"
             value="battleship"
+            className="m-2"
             onClick={(e) => {
               this.boatSelection(e)
             }}
@@ -320,6 +327,7 @@ class Grille extends Component {
           <button
             type="button"
             value="carrier"
+            className="m-2"
             onClick={(e) => {
               this.boatSelection(e)
             }}
