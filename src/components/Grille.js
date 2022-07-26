@@ -8,33 +8,11 @@ class Grille extends Component {
     this.state = {
       arrayGridX: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       arrayGridY: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-      patrolBoat: [
-        [1, "A"],
-        [2, "A"],
-      ],
-      submarine: [
-        [3, "B"],
-        [3, "C"],
-        [3, "D"],
-      ],
-      destroyer: [
-        [5, "F"],
-        [6, "F"],
-        [7, "F"],
-      ],
-      battleship: [
-        [10, "A"],
-        [10, "B"],
-        [10, "C"],
-        [10, "D"],
-      ],
-      carrier: [
-        [1, "J"],
-        [2, "J"],
-        [3, "J"],
-        [4, "J"],
-        [5, "J"],
-      ],
+      patrolBoat: ["1A", "2A"],
+      submarine: ["3B", "3C", "3D"],
+      destroyer: ["5F", "6F", "7F"],
+      battleship: ["10A", "10B", "10C", "10D"],
+      carrier: ["1J", "2J", "3J", "4J", "5J"],
     }
   }
   handleClick = (x, y) => {
@@ -42,19 +20,29 @@ class Grille extends Component {
   }
 
   isFilledPatrolBoat = (position) => {
-    return lodash.find(this.state.patrolBoat, position)
+    return this.state.patrolBoat.includes(position)
   }
   isFilledSubmarine = (position) => {
-    return lodash.find(this.state.submarine, position)
+    return this.state.submarine.includes(position)
   }
   isFilledDestroyer = (position) => {
-    return lodash.find(this.state.destroyer, position)
+    return this.state.destroyer.includes(position)
   }
   isFilledBattleship = (position) => {
-    return lodash.find(this.state.battleship, position)
+    return this.state.battleship.includes(position)
   }
   isFilledCarrier = (position) => {
-    return lodash.find(this.state.carrier, position)
+    return this.state.carrier.includes(position)
+  }
+
+  isFilled = (position) => {
+    return (
+      this.isFilledPatrolBoat(position) ||
+      this.isFilledSubmarine(position) ||
+      this.isFilledDestroyer(position) ||
+      this.isFilledBattleship(position) ||
+      this.isFilledCarrier(position)
+    )
   }
 
   render() {
@@ -67,7 +55,7 @@ class Grille extends Component {
                 return (
                   <div
                     className={`square ${
-                      this.isFilledPatrolBoat([x, y]) && "filled"
+                      this.isFilled(`${x}${y}`) && "filled"
                     }`}
                     onClick={() => {
                       this.handleClick(x, y)
