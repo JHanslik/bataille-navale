@@ -4,34 +4,35 @@ import Placement from "./components/Placement"
 import Header from "./components/Header"
 import "./App.css"
 
-
-
 class App extends Component {
   constructor() {
-  super()
+    super()
 
-  this.state = {
-    status:"start"
+    this.state = {
+      status: "start",
+    }
   }
-}
 
-gameStart = () => {
-  this.setState({
-    status:"placement"
-  })
-}
-placementDone = () => {
-  this.setState ({
-    status:"game"
-  })
-}
+  gameStart = () => {
+    this.setState({
+      status: "placement",
+    })
+  }
+  placementDone = () => {
+    this.setState({
+      status: "game",
+    })
+  }
   render() {
-    
     return (
       <div>
-        <Header/>
-        {this.state.status === "start" && <Start startStatus={this.gameStart}/>}
-        {this.state.status === "placement" && <Placement placementDone={this.placementDone}/>}
+        <Header />
+        {this.state.status === "start" && (
+          <Start startStatus={this.gameStart} />
+        )}
+        {this.state.status === "placement" && (
+          <Placement placementDone={this.placementDone} />
+        )}
       </div>
     )
   }
