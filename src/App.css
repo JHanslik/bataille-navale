@@ -1,9 +1,17 @@
+body {
+  background-color: #c6c5b9;
+}
 .square {
   width: 30px;
   height: 30px;
   border: 1px solid black;
+  background-color: #4289ca;
+}
+.square:hover {
+  cursor: pointer;
+  background-color: rgb(220, 220, 220);
 }
 
 .filled {
-  background-color: blue;
+  background-color: #a22c29;
 }

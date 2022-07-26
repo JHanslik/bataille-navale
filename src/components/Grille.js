@@ -7,15 +7,56 @@ class Grille extends Component {
     this.state = {
       arrayGridX: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       arrayGridY: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-      patrolBoat: ["1A", "2A"],
-      submarine: ["3B", "3C", "3D"],
-      destroyer: ["5F", "6F", "7F"],
-      battleship: ["10A", "10B", "10C", "10D"],
-      carrier: ["1J", "2J", "3J", "4J", "5J"],
+      patrolBoat: [],
+      submarine: [],
+      destroyer: [],
+      battleship: [],
+      carrier: [],
     }
   }
-  handleClick = (x, y) => {
-    console.log(x, y)
+  handleClickPatrolBoat = (x, y) => {
+    let clonedPatrolBoat = [...this.state.patrolBoat]
+    clonedPatrolBoat.length < 2 && clonedPatrolBoat.push(`${x}${y}`)
+    this.setState({
+      patrolBoat: clonedPatrolBoat,
+    })
+  }
+  handleClickSubmarine = (x, y) => {
+    let clonedSubmarine = [...this.state.submarine]
+    clonedSubmarine.length < 3 && clonedSubmarine.push(`${x}${y}`)
+    this.setState({
+      submarine: clonedSubmarine,
+    })
+  }
+  handleClickDestroyer = (x, y) => {
+    let clonedDestroyer = [...this.state.destroyer]
+    clonedDestroyer.length < 3 && clonedDestroyer.push(`${x}${y}`)
+    this.setState({
+      destroyer: clonedDestroyer,
+    })
+  }
+  handleClickBattleship = (x, y) => {
+    let clonedBattleship = [...this.state.battleship]
+    clonedBattleship.length < 4 && clonedBattleship.push(`${x}${y}`)
+    this.setState({
+      battleship: clonedBattleship,
+    })
+  }
+  handleClickCarrier = (x, y) => {
+    let clonedCarrier = [...this.state.carrier]
+    clonedCarrier.length < 5 && clonedCarrier.push(`${x}${y}`)
+    this.setState({
+      carrier: clonedCarrier,
+    })
+  }
+
+  boatSelection = (e, x, y) => {
+    console.log(e.target.value)
+    e.target.value === "patrolBoat" && this.handleClickPatrolBoat(x, y)
+    e.target.value === "submarine" && this.handleClickSubmarine(x, y)
+    e.target.value === "destroyer" && this.handleClickDestroyer(x, y)
+    e.target.value === "battleship" && this.handleClickBattleship(x, y)
+    e.target.value === "carrier" && this.handleClickCarrier(x, y)
   }
 
   isFilledPatrolBoat = (position) => {
@@ -57,7 +98,7 @@ class Grille extends Component {
                       this.isFilled(`${x}${y}`) && "filled"
                     }`}
                     onClick={() => {
-                      this.handleClick(x, y)
+                      this.handleClickCarrier(x, y)
                     }}
                   ></div>
                 )
@@ -65,6 +106,51 @@ class Grille extends Component {
             </div>
           )
         })}
+        <button
+          type="button"
+          value="patrolBoat"
+          onClick={(e) => {
+            this.boatSelection(e)
+          }}
+        >
+          Patrol Boat
+        </button>
+        <button
+          type="button"
+          value="submarine"
+          onClick={(e) => {
+            this.boatSelection(e)
+          }}
+        >
+          Submarine
+        </button>
+        <button
+          type="button"
+          value="destroyer"
+          onClick={(e) => {
+            this.boatSelection(e)
+          }}
+        >
+          Destroyer
+        </button>
+        <button
+          type="button"
+          value="battleship"
+          onClick={(e) => {
+            this.boatSelection(e)
+          }}
+        >
+          Battleship
+        </button>
+        <button
+          type="button"
+          value="carrier"
+          onClick={(e) => {
+            this.boatSelection(e)
+          }}
+        >
+          Carrier
+        </button>
       </div>
     )
   }
