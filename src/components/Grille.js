@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import Case from "./Case"
 
 class Grille extends Component {
   constructor() {
