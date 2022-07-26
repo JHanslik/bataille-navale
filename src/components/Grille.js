@@ -13,6 +13,7 @@ class Grille extends Component {
       destroyer: [],
       battleship: [],
       carrier: [],
+      locked: false
     }
   }
   handleClickPatrolBoat = (x, y) => {
@@ -45,6 +46,11 @@ class Grille extends Component {
         })
       }
     }
+    if (this.state.patrolBoat.length === 2) {
+      this.setState ({
+        locked:false
+      })
+    }
   }
   handleClickSubmarine = (x, y) => {
     let clonedSubmarine = [...this.state.submarine]
@@ -75,6 +81,11 @@ class Grille extends Component {
           submarine: clonedSubmarine,
         })
       }
+    }
+    if (this.state.submarine.length === 3) {
+      this.setState ({
+        locked:false
+      })
     }
   }
   handleClickDestroyer = (x, y) => {
@@ -107,6 +118,11 @@ class Grille extends Component {
         })
       }
     }
+    if (this.state.destroyer.length === 3) {
+      this.setState ({
+        locked:false
+      })
+    }
   }
   handleClickBattleship = (x, y) => {
     let clonedBattleship = [...this.state.battleship]
@@ -137,6 +153,11 @@ class Grille extends Component {
           battleship: clonedBattleship,
         })
       }
+    }
+    if (this.state.battleship.length === 4) {
+      this.setState ({
+        locked:false
+      })
     }
   }
   handleClickCarrier = (x, y) => {
@@ -169,28 +190,38 @@ class Grille extends Component {
         })
       }
     }
+    if (this.state.carrier.length === 5) {
+      this.setState ({
+        locked:false
+      })
+    }
   }
 
   boatSelection = (e, x, y) => {
-    if (e.target.value === "patrolBoat") {
+    if (e.target.value === "patrolBoat" && !this.state.locked) {
       this.setState({
         boatSelected: "patrolBoat",
+        locked: true,
       })
-    } else if (e.target.value === "submarine") {
+    } else if (e.target.value === "submarine" && !this.state.locked) {
       this.setState({
         boatSelected: "submarine",
+        locked: true
       })
-    } else if (e.target.value === "destroyer") {
+    } else if (e.target.value === "destroyer" && !this.state.locked) {
       this.setState({
         boatSelected: "destroyer",
+        locked: true,
       })
-    } else if (e.target.value === "battleship") {
+    } else if (e.target.value === "battleship" && !this.state.locked) {
       this.setState({
         boatSelected: "battleship",
+        locked: true,
       })
-    } else if (e.target.value === "carrier") {
+    } else if (e.target.value === "carrier" && !this.state.locked) {
       this.setState({
         boatSelected: "carrier",
+        locked: true,
       })
     }
   }
@@ -209,7 +240,7 @@ class Grille extends Component {
     }
   }
 
-  placementDirection = async () => {
+  placementDirection = () => {
     if (this.state.direction === "Horizontal") {
       this.setState({
         direction: "Vertical",
@@ -248,6 +279,8 @@ class Grille extends Component {
   }
 
   render() {
+    console.log (this.state.direction)
+    console.log(this.state.boatSelected)
     // console.log(this.state.patrolBoat)
     // console.log(this.state.submarine)
     // console.log(this.state.destroyer)
@@ -265,7 +298,7 @@ class Grille extends Component {
                       this.isFilled(`${x}${y}`) && "filled"
                     }`}
                     onClick={() => {
-                      this.handleClickCarrier(x, y)
+                      this.handleClick(x, y)
                     }}
                   ></div>
                 )
