@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-class Grille extends Component {
+class PlacementGrid extends Component {
   constructor() {
     super()
 
@@ -46,7 +46,7 @@ class Grille extends Component {
         })
       }
     }
-    if (this.state.patrolBoat.length === 2) {
+    if (clonedPatrolBoat.length === 2) {
       this.setState({
         locked: false,
       })
@@ -82,7 +82,7 @@ class Grille extends Component {
         })
       }
     }
-    if (this.state.submarine.length === 3) {
+    if (clonedSubmarine.length === 3) {
       this.setState({
         locked: false,
       })
@@ -118,7 +118,7 @@ class Grille extends Component {
         })
       }
     }
-    if (this.state.destroyer.length === 3) {
+    if (clonedDestroyer.length === 3) {
       this.setState({
         locked: false,
       })
@@ -154,7 +154,7 @@ class Grille extends Component {
         })
       }
     }
-    if (this.state.battleship.length === 4) {
+    if (clonedBattleship.length === 4) {
       this.setState({
         locked: false,
       })
@@ -193,7 +193,7 @@ class Grille extends Component {
         })
       }
     }
-    if (this.state.carrier.length === 5) {
+    if (clonedCarrier.length === 5) {
       this.setState({
         locked: false,
       })
@@ -316,11 +316,13 @@ class Grille extends Component {
         >
           {this.state.direction}
         </button>
-        <div>
+        <div className="text-center">
           <button
             type="button"
             value="patrolBoat"
-            className="m-2"
+            className={`m-2 boat ${
+              this.state.patrolBoat.length === 2 && "placed"
+            }`}
             onClick={(e) => {
               this.boatSelection(e)
             }}
@@ -330,7 +332,9 @@ class Grille extends Component {
           <button
             type="button"
             value="submarine"
-            className="m-2"
+            className={`m-2 boat ${
+              this.state.submarine.length === 3 && "placed"
+            }`}
             onClick={(e) => {
               this.boatSelection(e)
             }}
@@ -340,7 +344,9 @@ class Grille extends Component {
           <button
             type="button"
             value="destroyer"
-            className="m-2"
+            className={`m-2 boat ${
+              this.state.destroyer.length === 3 && "placed"
+            }`}
             onClick={(e) => {
               this.boatSelection(e)
             }}
@@ -350,7 +356,9 @@ class Grille extends Component {
           <button
             type="button"
             value="battleship"
-            className="m-2"
+            className={`m-2 boat ${
+              this.state.battleship.length === 4 && "placed"
+            }`}
             onClick={(e) => {
               this.boatSelection(e)
             }}
@@ -360,7 +368,9 @@ class Grille extends Component {
           <button
             type="button"
             value="carrier"
-            className="m-2"
+            className={`m-2 boat ${
+              this.state.carrier.length === 5 && "placed"
+            }`}
             onClick={(e) => {
               this.boatSelection(e)
             }}
@@ -372,4 +382,4 @@ class Grille extends Component {
     )
   }
 }
-export default Grille
+export default PlacementGrid

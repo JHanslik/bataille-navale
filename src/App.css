@@ -12,7 +12,7 @@ body {
 }
 .square:hover {
   cursor: pointer;
-  background-color: rgb(220, 220, 220);
+  background-color: #33689a;
 }
 
 .filled {
@@ -22,20 +22,39 @@ body {
 header {
   background-color: #2f74b4;
   border-bottom: 5px solid #184d7e;
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
   color: white;
+}
+
+.boat {
+  transition: 0.3s ease;
+}
+.boat:hover {
+  background-color: rgb(138, 138, 138);
+  transform: scale(0.9);
 }
 
 .green-button {
   background-color: #44aa98;
   color: white;
   padding: 20px 35px;
+  transition: 0.3s ease;
+}
+.green-button:hover {
+  background-color: #378879;
+  transform: scale(0.9);
 }
 
 #rotate-button {
   background-color: #353535;
   color: white;
   padding: 10px 30px;
+  transition: 0.3s ease;
+}
+#rotate-button:hover {
+  background-color: #272727;
+  transform: scale(0.9);
+}
+
+.placed {
+  background-color: #272727;
 }

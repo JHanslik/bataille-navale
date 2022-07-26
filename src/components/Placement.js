@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import Grille from "./Grille"
+import PlacementGrid from "./PlacementGrid"
 import "../App.css"
 
 class Start extends Component {
@@ -9,7 +9,7 @@ class Start extends Component {
         <h2 className="text-white text-center m-4">Place your boats</h2>
 
         <div>
-          <Grille />
+          <PlacementGrid />
         </div>
         <button
           id="placement-done-button"
