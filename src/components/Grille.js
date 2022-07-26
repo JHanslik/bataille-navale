@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import lodash from "lodash"
 
 class Grille extends Component {
   constructor() {
