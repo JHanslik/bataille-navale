@@ -7,3 +7,25 @@
 .filled {
   background-color: blue;
 }
+
+header {
+  background-color: #2F74B4;
+  height: 80px;
+  border-bottom: 5px solid #184D7E;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.green-button {
+  background-color: #44AA98;
+  color: white;
+  padding: 20px 35px;
+}
+
+#rotate-button {
+  background-color: #353535;
+  color: white;
+  padding: 10px 30px;
+}
