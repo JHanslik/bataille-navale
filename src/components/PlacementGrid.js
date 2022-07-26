@@ -1,13 +1,13 @@
 import React, { Component } from "react"
 
-class Grille extends Component {
+class PlacementGrid extends Component {
   constructor() {
     super()
 
     this.state = {
       arrayGrid: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
       boatSelected: "",
-      direction: "Horizontal",
+      direction: "Vertical",
       patrolBoat: [],
       submarine: [],
       destroyer: [],
@@ -36,7 +36,7 @@ class Grille extends Component {
         })
       } else if (
         this.state.direction === "Vertical" &&
-        clonedPatrolBoat[0].charAt(0) === `${y}` &&
+        clonedPatrolBoat[0].charAt(1) === `${y}` &&
         (this.isFilledPatrolBoat(`${x - 1}${y}`) ||
           this.isFilledPatrolBoat(`${x + 1}${y}`))
       ) {
@@ -46,7 +46,7 @@ class Grille extends Component {
         })
       }
     }
-    if (this.state.patrolBoat.length === 2) {
+    if (clonedPatrolBoat.length === 2) {
       this.setState({
         locked: false,
       })
@@ -72,7 +72,7 @@ class Grille extends Component {
         })
       } else if (
         this.state.direction === "Vertical" &&
-        clonedSubmarine[0].charAt(0) === `${y}` &&
+        clonedSubmarine[0].charAt(1) === `${y}` &&
         (this.isFilledSubmarine(`${x - 1}${y}`) ||
           this.isFilledSubmarine(`${x + 1}${y}`))
       ) {
@@ -82,7 +82,7 @@ class Grille extends Component {
         })
       }
     }
-    if (this.state.submarine.length === 3) {
+    if (clonedSubmarine.length === 3) {
       this.setState({
         locked: false,
       })
@@ -108,7 +108,7 @@ class Grille extends Component {
         })
       } else if (
         this.state.direction === "Vertical" &&
-        clonedDestroyer[0].charAt(0) === `${y}` &&
+        clonedDestroyer[0].charAt(1) === `${y}` &&
         (this.isFilledDestroyer(`${x - 1}${y}`) ||
           this.isFilledDestroyer(`${x + 1}${y}`))
       ) {
@@ -118,7 +118,7 @@ class Grille extends Component {
         })
       }
     }
-    if (this.state.destroyer.length === 3) {
+    if (clonedDestroyer.length === 3) {
       this.setState({
         locked: false,
       })
@@ -144,7 +144,7 @@ class Grille extends Component {
         })
       } else if (
         this.state.direction === "Vertical" &&
-        clonedBattleship[0].charAt(0) === `${y}` &&
+        clonedBattleship[0].charAt(1) === `${y}` &&
         (this.isFilledBattleship(`${x - 1}${y}`) ||
           this.isFilledBattleship(`${x + 1}${y}`))
       ) {
@@ -154,7 +154,7 @@ class Grille extends Component {
         })
       }
     }
-    if (this.state.battleship.length === 4) {
+    if (clonedBattleship.length === 4) {
       this.setState({
         locked: false,
       })
@@ -164,6 +164,7 @@ class Grille extends Component {
     let clonedCarrier = [...this.state.carrier]
     if (clonedCarrier.length < 5 && !this.isFilledCarrier(`${x}${y}`)) {
       if (clonedCarrier.length === 0) {
+        console.log("premier bloc")
         clonedCarrier.push(`${x}${y}`)
         this.setState({
           carrier: clonedCarrier,
@@ -174,23 +175,25 @@ class Grille extends Component {
         (this.isFilledCarrier(`${x}${y - 1}`) ||
           this.isFilledCarrier(`${x}${y + 1}`))
       ) {
+        console.log("horizontal")
         clonedCarrier.push(`${x}${y}`)
         this.setState({
           carrier: clonedCarrier,
         })
       } else if (
         this.state.direction === "Vertical" &&
-        clonedCarrier[0].charAt(0) === `${y}` &&
+        clonedCarrier[0].charAt(1) === `${y}` &&
         (this.isFilledCarrier(`${x - 1}${y}`) ||
           this.isFilledCarrier(`${x + 1}${y}`))
       ) {
+        console.log("vertical")
         clonedCarrier.push(`${x}${y}`)
         this.setState({
           carrier: clonedCarrier,
         })
       }
     }
-    if (this.state.carrier.length === 5) {
+    if (clonedCarrier.length === 5) {
       this.setState({
         locked: false,
       })
@@ -287,7 +290,7 @@ class Grille extends Component {
     // console.log(this.state.battleship)
     // console.log(this.state.carrier)
     return (
-      <div>
+      <div className="d-flex flex-column align-items-center">
         {this.state.arrayGrid.map((x) => {
           return (
             <div className="d-flex">
@@ -308,15 +311,18 @@ class Grille extends Component {
         })}
         <button
           id="rotate-button"
-          className="mx-auto"
+          className="mx-auto m-3"
           onClick={this.placementDirection}
         >
           {this.state.direction}
         </button>
-        <div>
+        <div className="text-center">
           <button
             type="button"
             value="patrolBoat"
+            className={`m-2 boat ${
+              this.state.patrolBoat.length === 2 && "placed"
+            }`}
             onClick={(e) => {
               this.boatSelection(e)
             }}
@@ -326,6 +332,9 @@ class Grille extends Component {
           <button
             type="button"
             value="submarine"
+            className={`m-2 boat ${
+              this.state.submarine.length === 3 && "placed"
+            }`}
             onClick={(e) => {
               this.boatSelection(e)
             }}
@@ -335,6 +344,9 @@ class Grille extends Component {
           <button
             type="button"
             value="destroyer"
+            className={`m-2 boat ${
+              this.state.destroyer.length === 3 && "placed"
+            }`}
             onClick={(e) => {
               this.boatSelection(e)
             }}
@@ -344,6 +356,9 @@ class Grille extends Component {
           <button
             type="button"
             value="battleship"
+            className={`m-2 boat ${
+              this.state.battleship.length === 4 && "placed"
+            }`}
             onClick={(e) => {
               this.boatSelection(e)
             }}
@@ -353,6 +368,9 @@ class Grille extends Component {
           <button
             type="button"
             value="carrier"
+            className={`m-2 boat ${
+              this.state.carrier.length === 5 && "placed"
+            }`}
             onClick={(e) => {
               this.boatSelection(e)
             }}
@@ -364,4 +382,4 @@ class Grille extends Component {
     )
   }
 }
-export default Grille
+export default PlacementGrid

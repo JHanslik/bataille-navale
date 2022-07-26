@@ -1,19 +1,19 @@
 import React, { Component } from "react"
-import Grille from "./Grille"
+import PlacementGrid from "./PlacementGrid"
 import "../App.css"
 
 class Start extends Component {
   render() {
     return (
-      <div>
-        <h2 className="text-white">Place your boats</h2>
+      <div className="container d-flex flex-column align-items-center justify-content-center">
+        <h2 className="text-white text-center m-4">Place your boats</h2>
 
-        <div className="container text-center">
-          <Grille />
+        <div>
+          <PlacementGrid />
         </div>
         <button
           id="placement-done-button"
-          className="green-button"
+          className="green-button m-3"
           onClick={this.props.placementDone}
         >
           GO

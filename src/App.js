@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import Start from "./components/Start"
 import Placement from "./components/Placement"
 import Header from "./components/Header"
+import InGame from "./components/InGame"
 import "./App.css"
 
 class App extends Component {
@@ -33,6 +34,7 @@ class App extends Component {
         {this.state.status === "placement" && (
           <Placement placementDone={this.placementDone} />
         )}
+        {this.state.status === "game" && <InGame />}
       </div>
     )
   }
