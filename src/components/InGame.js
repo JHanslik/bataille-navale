@@ -10,7 +10,10 @@ class InGame extends Component {
           isFilled={this.props.isFilled}
           arrayGrid={this.props.arrayGrid}
         />
-        <EnnemyGrid />
+        <EnnemyGrid 
+          isFilledEnnemy={this.props.isFilledEnnemy}
+          arrayGrid={this.props.arrayGrid}
+          />
       </div>
     )
   }
