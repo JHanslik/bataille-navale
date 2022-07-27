@@ -20,6 +20,9 @@ class App extends Component {
       battleship: [],
       carrier: [],
       locked: false,
+      playerAttacks: [],
+      ennemyAttacks: [],
+      playing: "",
     }
   }
 
@@ -288,6 +291,17 @@ class App extends Component {
       this.isFilledBattleship(position) ||
       this.isFilledCarrier(position)
     )
+  }
+
+  missedFunction = (x, y) => {
+    let clonedPlayerAttacks = [...this.state.playerAttacks]
+    let clonedEnnemyAttacks = [...this.state.ennemyAttacks]
+
+    if (!clonedPlayerAttacks.includes(`${x}${y}`)) {
+      if (!this.isFilled(position)) {
+        clonedPlayerAttacks.push(`${x}${y}`)
+      }
+    }
   }
 
   gameStart = () => {
