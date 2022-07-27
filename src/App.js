@@ -20,6 +20,11 @@ class App extends Component {
       battleship: [],
       carrier: [],
       locked: false,
+      patrolBoatEnnemy: ["37", "47"],
+      submarineEnnemy: ["11", "12", "13"],
+      destroyerEnnemy: ["87", "86", "85"],
+      battleshipEnnemy: ["64", "65", "66", "67"],
+      carrierEnnemy: ["06", "16", "26", "36", "46"],
     }
   }
 
@@ -290,6 +295,32 @@ class App extends Component {
     )
   }
 
+  isFilledPatrolBoatEnnemy = (position) => {
+    return this.state.patrolBoatEnnemy.includes(position)
+  }
+  isFilledSubmarineEnnemy = (position) => {
+    return this.state.submarineEnnemy.includes(position)
+  }
+  isFilledDestroyerEnnemy = (position) => {
+    return this.state.destroyerEnnemy.includes(position)
+  }
+  isFilledBattleshipEnnemy = (position) => {
+    return this.state.battleshipEnnemy.includes(position)
+  }
+  isFilledCarrierEnnemy = (position) => {
+    return this.state.carrierEnnemy.includes(position)
+  }
+
+  isFilledEnnemy = (position) => {
+    return (
+      this.isFilledPatrolBoatEnnemy(position) ||
+      this.isFilledSubmarineEnnemy(position) ||
+      this.isFilledDestroyerEnnemy(position) ||
+      this.isFilledBattleshipEnnemy(position) ||
+      this.isFilledCarrierEnnemy(position)
+    )
+  }
+
   gameStart = () => {
     this.setState({
       status: "placement",
@@ -324,7 +355,11 @@ class App extends Component {
           />
         )}
         {this.state.status === "game" && (
-          <InGame isFilled={this.isFilled} arrayGrid={this.state.arrayGrid} />
+          <InGame
+            isFilled={this.isFilled}
+            arrayGrid={this.state.arrayGrid}
+            isFilledEnnemy={this.isFilledEnnemy}
+          />
         )}
       </div>
     )
