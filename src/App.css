@@ -18,7 +18,15 @@ body {
 .filled {
   background-color: #a22c29;
 }
-
+.missed {
+  background-color: greenyellow;
+}
+.hit {
+  background-color: orange;
+}
+.sunk {
+  background-color: rgb(30, 30, 30);
+}
 header {
   background-color: #2f74b4;
   border-bottom: 5px solid #184d7e;

@@ -25,7 +25,22 @@ class App extends Component {
       destroyerEnnemy: ["87", "86", "85"],
       battleshipEnnemy: ["64", "65", "66", "67"],
       carrierEnnemy: ["06", "16", "26", "36", "46"],
+      ennemyBoats: [],
+      playerAttacks: [],
+      ennemyAttacks: [],
+      playing: "",
     }
+  }
+  componentDidMount() {
+    this.setState({
+      ennemyBoats: [
+        ...this.state.patrolBoatEnnemy,
+        ...this.state.submarineEnnemy,
+        ...this.state.destroyerEnnemy,
+        ...this.state.battleshipEnnemy,
+        ...this.state.carrierEnnemy,
+      ],
+    })
   }
 
   handleClickPatrolBoat = (x, y) => {
@@ -321,6 +336,85 @@ class App extends Component {
     )
   }
 
+  handleClickAttack = (x, y) => {
+    let clonedPlayerAttacks = [...this.state.playerAttacks]
+
+    if (!clonedPlayerAttacks.includes(`${x}${y}`)) {
+      clonedPlayerAttacks.push(`${x}${y}`)
+      this.setState({
+        playerAttacks: clonedPlayerAttacks,
+      })
+    }
+  }
+
+  missedAttack = (position) => {
+    return this.playerMissedFilled(position)
+  }
+  hitAttack = (position) => {
+    return this.playerHitFilled(position)
+  }
+
+  patrolBoatEnnemySunk = (position) => {
+    const patrolBoatEnnemySunk = this.state.patrolBoatEnnemy.every((e) => {
+      return this.state.playerAttacks.includes(e)
+    })
+    return (
+      patrolBoatEnnemySunk && this.state.patrolBoatEnnemy.includes(position)
+    )
+  }
+  submarineEnnemySunk = (position) => {
+    const submarineEnnemySunk = this.state.submarineEnnemy.every((e) => {
+      return this.state.playerAttacks.includes(e)
+    })
+    return submarineEnnemySunk && this.state.submarineEnnemy.includes(position)
+  }
+  destroyerEnnemySunk = (position) => {
+    const destroyerEnnemySunk = this.state.destroyerEnnemy.every((e) => {
+      return this.state.playerAttacks.includes(e)
+    })
+    return destroyerEnnemySunk && this.state.destroyerEnnemy.includes(position)
+  }
+  battleshipEnnemySunk = (position) => {
+    const battleshipEnnemySunk = this.state.battleshipEnnemy.every((e) => {
+      return this.state.playerAttacks.includes(e)
+    })
+    return (
+      battleshipEnnemySunk && this.state.battleshipEnnemy.includes(position)
+    )
+  }
+  carrierEnnemySunk = (position) => {
+    const carrierEnnemySunk = this.state.carrierEnnemy.every((e) => {
+      return this.state.playerAttacks.includes(e)
+    })
+    return carrierEnnemySunk && this.state.carrierEnnemy.includes(position)
+  }
+
+  playerMissedFilled = (position) => {
+    return (
+      this.state.playerAttacks.includes(position) &&
+      !this.state.ennemyBoats.includes(position)
+    )
+  }
+  playerHitFilled = (position) => {
+    return (
+      this.state.playerAttacks.includes(position) &&
+      this.state.ennemyBoats.includes(position)
+    )
+  }
+
+  missedFunctionEnnemy = (x, y) => {
+    let clonedEnnemyAttacks = [...this.state.ennemyAttacks]
+
+    if (!clonedEnnemyAttacks.includes(`${x}${y}`)) {
+      if (!this.isFilledEnnemy(`${x}${y}`)) {
+        clonedEnnemyAttacks.push(`${x}${y}`)
+        this.setState({
+          ennemyAttacks: clonedEnnemyAttacks,
+        })
+      }
+    }
+  }
+
   gameStart = () => {
     this.setState({
       status: "placement",
@@ -332,6 +426,7 @@ class App extends Component {
     })
   }
   render() {
+    console.log(this.carrierEnnemySunk())
     return (
       <div>
         <Header />
@@ -359,6 +454,15 @@ class App extends Component {
             isFilled={this.isFilled}
             arrayGrid={this.state.arrayGrid}
             isFilledEnnemy={this.isFilledEnnemy}
+            attackClick={this.handleClickAttack}
+            attackMissed={this.missedAttack}
+            attackHit={this.hitAttack}
+            ennemyBoatSunk={this.isSunk}
+            patrolBoatEnnemySunk={this.patrolBoatEnnemySunk}
+            submarineEnnemySunk={this.submarineEnnemySunk}
+            destroyerEnnemySunk={this.destroyerEnnemySunk}
+            battleshipEnnemySunk={this.battleshipEnnemySunk}
+            carrierEnnemySunk={this.carrierEnnemySunk}
           />
         )}
       </div>

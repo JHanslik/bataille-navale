@@ -13,7 +13,18 @@ class EnnemyGrid extends Component {
                     <div
                       className={`square ${
                         this.props.isFilledEnnemy(`${x}${y}`) && "filled"
-                      }`}
+                      }
+                        ${this.props.attackMissed(`${x}${y}`) && "missed"}
+                        ${this.props.attackHit(`${x}${y}`) && "hit"}
+                        ${this.props.patrolBoatEnnemySunk(`${x}${y}`) && "sunk"}
+                        ${this.props.submarineEnnemySunk(`${x}${y}`) && "sunk"}
+                        ${this.props.destroyerEnnemySunk(`${x}${y}`) && "sunk"}
+                        ${this.props.battleshipEnnemySunk(`${x}${y}`) && "sunk"}
+                        ${this.props.carrierEnnemySunk(`${x}${y}`) && "sunk"}
+                        `}
+                      onClick={() => {
+                        this.props.attackClick(x, y)
+                      }}
                     ></div>
                   )
                 })}

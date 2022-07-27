@@ -10,10 +10,18 @@ class InGame extends Component {
           isFilled={this.props.isFilled}
           arrayGrid={this.props.arrayGrid}
         />
-        <EnnemyGrid 
+        <EnnemyGrid
           isFilledEnnemy={this.props.isFilledEnnemy}
           arrayGrid={this.props.arrayGrid}
-          />
+          attackClick={this.props.attackClick}
+          attackMissed={this.props.attackMissed}
+          attackHit={this.props.attackHit}
+          patrolBoatEnnemySunk={this.props.patrolBoatEnnemySunk}
+          submarineEnnemySunk={this.props.submarineEnnemySunk}
+          destroyerEnnemySunk={this.props.destroyerEnnemySunk}
+          battleshipEnnemySunk={this.props.battleshipEnnemySunk}
+          carrierEnnemySunk={this.props.carrierEnnemySunk}
+        />
       </div>
     )
   }
