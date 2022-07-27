@@ -323,7 +323,9 @@ class App extends Component {
             carrier={this.state.carrier}
           />
         )}
-        {this.state.status === "game" && <InGame />}
+        {this.state.status === "game" && (
+          <InGame isFilled={this.isFilled} arrayGrid={this.state.arrayGrid} />
+        )}
       </div>
     )
   }

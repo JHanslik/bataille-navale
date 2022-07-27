@@ -42,22 +42,25 @@ class EnnemyGrid extends Component {
 
   render() {
     return (
-      <div className="d-flex flex-column align-items-center">
-        {this.state.arrayGrid.map((x) => {
-          return (
-            <div className="d-flex">
-              {this.state.arrayGrid.map((y) => {
-                return (
-                  <div
-                    className={`square ${
-                      this.isFilled(`${x}${y}`) && "filled"
-                    }`}
-                  ></div>
-                )
-              })}
-            </div>
-          )
-        })}
+      <div className="text-center">
+        <div className="d-flex flex-column align-items-center">
+          {this.state.arrayGrid.map((x) => {
+            return (
+              <div className="d-flex">
+                {this.state.arrayGrid.map((y) => {
+                  return (
+                    <div
+                      className={`square ${
+                        this.isFilled(`${x}${y}`) && "filled"
+                      }`}
+                    ></div>
+                  )
+                })}
+              </div>
+            )
+          })}
+        </div>
+        <h2 className="h3">Ennemy Grid !</h2>
       </div>
     )
   }
