@@ -282,13 +282,13 @@ class PlacementGrid extends Component {
   }
 
   render() {
-    console.log(this.state.direction)
-    console.log(this.state.boatSelected)
+    // console.log(this.state.direction)
+    // console.log(this.state.boatSelected)
     // console.log(this.state.patrolBoat)
     // console.log(this.state.submarine)
     // console.log(this.state.destroyer)
     // console.log(this.state.battleship)
-    // console.log(this.state.carrier)
+    console.log(this.state.carrier)
     return (
       <div className="d-flex flex-column align-items-center">
         {this.state.arrayGrid.map((x) => {
