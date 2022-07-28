@@ -34,7 +34,7 @@ class InGame extends Component {
         )}
         {this.props.remainingBoats !== 0 &&
           this.props.remainingEnnemyBoats !== 0 && (
-            <div className="d-flex justify-content-evenly m-5">
+            <div className="d-flex justify-content-evenly flex-wrap m-5">
               <PlayerGrid
                 isFilled={this.props.isFilled}
                 arrayGrid={this.props.arrayGrid}
