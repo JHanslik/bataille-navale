@@ -11,9 +11,7 @@ class EnnemyGrid extends Component {
                 {this.props.arrayGrid.map((y) => {
                   return (
                     <div
-                      className={`square ${
-                        this.props.isFilledEnnemy(`${x}${y}`) && "filled"
-                      }
+                      className={`square 
                         ${this.props.attackMissed(`${x}${y}`) && "missed"}
                         ${this.props.attackHit(`${x}${y}`) && "hit"}
                         ${this.props.patrolBoatEnnemySunk(`${x}${y}`) && "sunk"}
@@ -32,7 +30,8 @@ class EnnemyGrid extends Component {
             )
           })}
         </div>
-        <h2 className="h3">Ennemy Grid !</h2>
+        <h2 className="h5 mt-3">Ennemy Grid !</h2>
+        <p>Remaining Boats: {this.props.remainingEnnemyBoats}</p>
       </div>
     )
   }
