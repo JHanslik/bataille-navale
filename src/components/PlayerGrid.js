@@ -29,7 +29,8 @@ class PlayerGrid extends Component {
             )
           })}
         </div>
-        <h2 className="h3">Your Grid !</h2>
+        <h2 className="h5 mt-3">Your Grid !</h2>
+        <p>Remaining Boats: {this.props.remainingBoats}</p>
       </div>
     )
   }

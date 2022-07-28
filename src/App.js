@@ -21,16 +21,28 @@ class App extends Component {
       carrier: [],
       playerBoats: [],
       locked: false,
-      patrolBoatEnnemy: ["37", "47"],
-      submarineEnnemy: ["11", "12", "13"],
-      destroyerEnnemy: ["87", "86", "85"],
-      battleshipEnnemy: ["64", "65", "66", "67"],
-      carrierEnnemy: ["06", "16", "26", "36", "46"],
+      patrolBoatEnnemy: ["11", "21"],
+      submarineEnnemy: ["54", "55", "56"],
+      destroyerEnnemy: ["68", "78", "88"],
+      battleshipEnnemy: ["42", "52", "62", "72"],
+      carrierEnnemy: ["24", "25", "26", "27", "28"],
       ennemyTarget: "",
       ennemyBoats: [],
       playerAttacks: [],
       ennemyAttacks: [],
       playing: "",
+      patrolBoatEnnemySunk: false,
+      submarineEnnemySunk: false,
+      destroyerEnnemySunk: false,
+      battleshipEnnemySunk: false,
+      carrierEnnemySunk: false,
+      patrolBoatSunk: false,
+      submarineSunk: false,
+      destroyerSunk: false,
+      battleshipSunk: false,
+      carrierSunk: false,
+      remainingBoats: 5,
+      remainingEnnemyBoats: 5,
     }
   }
   componentDidMount() {
@@ -43,6 +55,164 @@ class App extends Component {
         ...this.state.carrierEnnemy,
       ],
     })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.state.patrolBoatEnnemySunk === false &&
+      prevState.playerAttacks.length !== this.state.playerAttacks.length
+    ) {
+      const patrolBoatEnnemySunk = this.state.patrolBoatEnnemy.every((e) => {
+        return this.state.playerAttacks.includes(e)
+      })
+      if (patrolBoatEnnemySunk) {
+        this.setState({
+          patrolBoatEnnemySunk: true,
+        })
+      }
+    }
+    if (
+      this.state.submarineEnnemySunk === false &&
+      prevState.playerAttacks.length !== this.state.playerAttacks.length
+    ) {
+      const submarineEnnemySunk = this.state.submarineEnnemy.every((e) => {
+        return this.state.playerAttacks.includes(e)
+      })
+      if (submarineEnnemySunk) {
+        this.setState({
+          submarineEnnemySunk: true,
+        })
+      }
+    }
+    if (
+      this.state.destroyerEnnemySunk === false &&
+      prevState.playerAttacks.length !== this.state.playerAttacks.length
+    ) {
+      const destroyerEnnemySunk = this.state.destroyerEnnemy.every((e) => {
+        return this.state.playerAttacks.includes(e)
+      })
+      if (destroyerEnnemySunk) {
+        this.setState({
+          destroyerEnnemySunk: true,
+        })
+      }
+    }
+    if (
+      this.state.battleshipEnnemySunk === false &&
+      prevState.playerAttacks.length !== this.state.playerAttacks.length
+    ) {
+      const battleshipEnnemySunk = this.state.battleshipEnnemy.every((e) => {
+        return this.state.playerAttacks.includes(e)
+      })
+      if (battleshipEnnemySunk) {
+        this.setState({
+          battleshipEnnemySunk: true,
+        })
+      }
+    }
+    if (
+      this.state.carrierEnnemySunk === false &&
+      prevState.playerAttacks.length !== this.state.playerAttacks.length
+    ) {
+      const carrierEnnemySunk = this.state.carrierEnnemy.every((e) => {
+        return this.state.playerAttacks.includes(e)
+      })
+      if (carrierEnnemySunk) {
+        this.setState({
+          carrierEnnemySunk: true,
+        })
+      }
+    }
+
+    if (
+      prevState.patrolBoatEnnemySunk !== this.state.patrolBoatEnnemySunk ||
+      prevState.submarineEnnemySunk !== this.state.submarineEnnemySunk ||
+      prevState.destroyerEnnemySunk !== this.state.destroyerEnnemySunk ||
+      prevState.battleshipEnnemySunk !== this.state.battleshipEnnemySunk ||
+      prevState.carrierEnnemySunk !== this.state.carrierEnnemySunk
+    ) {
+      this.setState({
+        remainingEnnemyBoats: this.state.remainingEnnemyBoats - 1,
+      })
+    }
+
+    if (
+      this.state.patrolBoatSunk === false &&
+      prevState.ennemyAttacks.length !== this.state.ennemyAttacks.length
+    ) {
+      const patrolBoatSunk = this.state.patrolBoat.every((e) => {
+        return this.state.ennemyAttacks.includes(e)
+      })
+      if (patrolBoatSunk) {
+        this.setState({
+          patrolBoatSunk: true,
+        })
+      }
+    }
+    if (
+      this.state.submarineSunk === false &&
+      prevState.ennemyAttacks.length !== this.state.ennemyAttacks.length
+    ) {
+      const submarineSunk = this.state.submarine.every((e) => {
+        return this.state.ennemyAttacks.includes(e)
+      })
+      if (submarineSunk) {
+        this.setState({
+          submarineSunk: true,
+        })
+      }
+    }
+    if (
+      this.state.destroyerSunk === false &&
+      prevState.ennemyAttacks.length !== this.state.ennemyAttacks.length
+    ) {
+      const destroyerSunk = this.state.destroyer.every((e) => {
+        return this.state.ennemyAttacks.includes(e)
+      })
+      if (destroyerSunk) {
+        this.setState({
+          destroyerSunk: true,
+        })
+      }
+    }
+    if (
+      this.state.battleshipSunk === false &&
+      prevState.ennemyAttacks.length !== this.state.ennemyAttacks.length
+    ) {
+      const battleshipSunk = this.state.battleship.every((e) => {
+        return this.state.ennemyAttacks.includes(e)
+      })
+      if (battleshipSunk) {
+        this.setState({
+          battleshipSunk: true,
+        })
+      }
+    }
+    if (
+      this.state.carrierSunk === false &&
+      prevState.ennemyAttacks.length !== this.state.ennemyAttacks.length
+    ) {
+      const carrierSunk = this.state.carrier.every((e) => {
+        return this.state.ennemyAttacks.includes(e)
+      })
+      if (carrierSunk) {
+        this.setState({
+          carrierSunk: true,
+        })
+      }
+    }
+
+    if (
+      prevState.patrolBoatSunk !== this.state.patrolBoatSunk ||
+      prevState.submarineSunk !== this.state.submarineSunk ||
+      prevState.destroyerSunk !== this.state.destroyerSunk ||
+      prevState.battleshipSunk !== this.state.battleshipSunk ||
+      prevState.carrierSunk !== this.state.carrierSunk
+    ) {
+      this.setState({
+        remainingBoats: this.state.remainingBoats - 1,
+      })
+    }
   }
 
   handleClickPatrolBoat = (x, y) => {
@@ -487,8 +657,11 @@ class App extends Component {
       status: "game",
     })
   }
+  refresh = () => {
+    window.location.reload(false)
+  }
+
   render() {
-    console.log(this.ennemyMissedFilled(this.state.ennemyTarget))
     return (
       <div>
         <Header />
@@ -532,6 +705,9 @@ class App extends Component {
             battleshipSunk={this.battleshipSunk}
             carrierSunk={this.carrierSunk}
             iaTarget={this.state.ennemyTarget}
+            remainingBoats={this.state.remainingBoats}
+            remainingEnnemyBoats={this.state.remainingEnnemyBoats}
+            refresh={this.refresh}
           />
         )}
       </div>
