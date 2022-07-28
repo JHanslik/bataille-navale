@@ -19,12 +19,14 @@ class App extends Component {
       destroyer: [],
       battleship: [],
       carrier: [],
+      playerBoats: [],
       locked: false,
       patrolBoatEnnemy: ["37", "47"],
       submarineEnnemy: ["11", "12", "13"],
       destroyerEnnemy: ["87", "86", "85"],
       battleshipEnnemy: ["64", "65", "66", "67"],
       carrierEnnemy: ["06", "16", "26", "36", "46"],
+      ennemyTarget: "",
       ennemyBoats: [],
       playerAttacks: [],
       ennemyAttacks: [],
@@ -76,6 +78,7 @@ class App extends Component {
     if (clonedPatrolBoat.length === 2) {
       this.setState({
         locked: false,
+        playerBoats: [...this.state.playerBoats, ...clonedPatrolBoat],
       })
     }
   }
@@ -113,6 +116,7 @@ class App extends Component {
     if (clonedSubmarine.length === 3) {
       this.setState({
         locked: false,
+        playerBoats: [...this.state.playerBoats, ...clonedSubmarine],
       })
     }
   }
@@ -149,6 +153,7 @@ class App extends Component {
     if (clonedDestroyer.length === 3) {
       this.setState({
         locked: false,
+        playerBoats: [...this.state.playerBoats, ...clonedDestroyer],
       })
     }
   }
@@ -185,6 +190,7 @@ class App extends Component {
     if (clonedBattleship.length === 4) {
       this.setState({
         locked: false,
+        playerBoats: [...this.state.playerBoats, ...clonedBattleship],
       })
     }
   }
@@ -192,7 +198,6 @@ class App extends Component {
     let clonedCarrier = [...this.state.carrier]
     if (clonedCarrier.length < 5 && !this.isFilledCarrier(`${x}${y}`)) {
       if (clonedCarrier.length === 0) {
-        console.log("premier bloc")
         clonedCarrier.push(`${x}${y}`)
         this.setState({
           carrier: clonedCarrier,
@@ -203,7 +208,6 @@ class App extends Component {
         (this.isFilledCarrier(`${x}${y - 1}`) ||
           this.isFilledCarrier(`${x}${y + 1}`))
       ) {
-        console.log("horizontal")
         clonedCarrier.push(`${x}${y}`)
         this.setState({
           carrier: clonedCarrier,
@@ -214,7 +218,6 @@ class App extends Component {
         (this.isFilledCarrier(`${x - 1}${y}`) ||
           this.isFilledCarrier(`${x + 1}${y}`))
       ) {
-        console.log("vertical")
         clonedCarrier.push(`${x}${y}`)
         this.setState({
           carrier: clonedCarrier,
@@ -224,12 +227,12 @@ class App extends Component {
     if (clonedCarrier.length === 5) {
       this.setState({
         locked: false,
+        playerBoats: [...this.state.playerBoats, ...clonedCarrier],
       })
     }
   }
 
   boatSelection = (e, x, y) => {
-    console.log(e.target.value)
     if (e.target.value === "patrolBoat" && !this.state.locked) {
       this.setState({
         boatSelected: "patrolBoat",
@@ -344,6 +347,7 @@ class App extends Component {
       this.setState({
         playerAttacks: clonedPlayerAttacks,
       })
+      this.randomAttack()
     }
   }
 
@@ -353,11 +357,19 @@ class App extends Component {
   hitAttack = (position) => {
     return this.playerHitFilled(position)
   }
+  ennemyMissedAttack = (position) => {
+    return this.ennemyMissedFilled(position)
+  }
+  ennemyHitAttack = (position) => {
+    return this.ennemyHitFilled(position)
+  }
+  // ------------------------------player part------------------------------------------------
 
   patrolBoatEnnemySunk = (position) => {
     const patrolBoatEnnemySunk = this.state.patrolBoatEnnemy.every((e) => {
       return this.state.playerAttacks.includes(e)
     })
+
     return (
       patrolBoatEnnemySunk && this.state.patrolBoatEnnemy.includes(position)
     )
@@ -402,18 +414,68 @@ class App extends Component {
     )
   }
 
-  missedFunctionEnnemy = (x, y) => {
-    let clonedEnnemyAttacks = [...this.state.ennemyAttacks]
+  // ---------------------------------------IA part-------------------------------------------
 
+  randomAttack = () => {
+    let x = Math.floor(Math.random() * 10)
+    let y = Math.floor(Math.random() * 10)
+    let clonedEnnemyAttacks = [...this.state.ennemyAttacks]
     if (!clonedEnnemyAttacks.includes(`${x}${y}`)) {
-      if (!this.isFilledEnnemy(`${x}${y}`)) {
-        clonedEnnemyAttacks.push(`${x}${y}`)
-        this.setState({
-          ennemyAttacks: clonedEnnemyAttacks,
-        })
-      }
+      clonedEnnemyAttacks.push(`${x}${y}`)
+      this.setState({
+        ennemyAttacks: clonedEnnemyAttacks,
+        ennemyTarget: `${x}${y}`,
+      })
+    } else if (clonedEnnemyAttacks.includes(`${x}${y}`)) {
+      this.randomAttack()
     }
   }
+
+  patrolBoatSunk = (position) => {
+    const patrolBoatSunk = this.state.patrolBoat.every((e) => {
+      return this.state.ennemyAttacks.includes(e)
+    })
+    return patrolBoatSunk && this.state.patrolBoat.includes(position)
+  }
+  submarineSunk = (position) => {
+    const submarineSunk = this.state.submarine.every((e) => {
+      return this.state.ennemyAttacks.includes(e)
+    })
+    return submarineSunk && this.state.submarine.includes(position)
+  }
+  destroyerSunk = (position) => {
+    const destroyerSunk = this.state.destroyer.every((e) => {
+      return this.state.ennemyAttacks.includes(e)
+    })
+    return destroyerSunk && this.state.destroyer.includes(position)
+  }
+  battleshipSunk = (position) => {
+    const battleshipSunk = this.state.battleship.every((e) => {
+      return this.state.ennemyAttacks.includes(e)
+    })
+    return battleshipSunk && this.state.battleship.includes(position)
+  }
+  carrierSunk = (position) => {
+    const carrierSunk = this.state.carrier.every((e) => {
+      return this.state.ennemyAttacks.includes(e)
+    })
+    return carrierSunk && this.state.carrier.includes(position)
+  }
+
+  ennemyMissedFilled = (position) => {
+    return (
+      this.state.ennemyAttacks.includes(position) &&
+      !this.state.playerBoats.includes(position)
+    )
+  }
+  ennemyHitFilled = (position) => {
+    return (
+      this.state.ennemyAttacks.includes(position) &&
+      this.state.playerBoats.includes(position)
+    )
+  }
+
+  // -----------------------------------------------------------------------------------------------
 
   gameStart = () => {
     this.setState({
@@ -426,7 +488,7 @@ class App extends Component {
     })
   }
   render() {
-    console.log(this.carrierEnnemySunk())
+    console.log(this.ennemyMissedFilled(this.state.ennemyTarget))
     return (
       <div>
         <Header />
@@ -457,12 +519,19 @@ class App extends Component {
             attackClick={this.handleClickAttack}
             attackMissed={this.missedAttack}
             attackHit={this.hitAttack}
-            ennemyBoatSunk={this.isSunk}
             patrolBoatEnnemySunk={this.patrolBoatEnnemySunk}
             submarineEnnemySunk={this.submarineEnnemySunk}
             destroyerEnnemySunk={this.destroyerEnnemySunk}
             battleshipEnnemySunk={this.battleshipEnnemySunk}
             carrierEnnemySunk={this.carrierEnnemySunk}
+            ennemyAttackMissed={this.ennemyMissedAttack}
+            ennemyAttackHit={this.ennemyHitAttack}
+            patrolBoatSunk={this.patrolBoatSunk}
+            submarineSunk={this.submarineSunk}
+            destroyerSunk={this.destroyerSunk}
+            battleshipSunk={this.battleshipSunk}
+            carrierSunk={this.carrierSunk}
+            iaTarget={this.state.ennemyTarget}
           />
         )}
       </div>

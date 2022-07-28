@@ -9,6 +9,14 @@ class InGame extends Component {
         <PlayerGrid
           isFilled={this.props.isFilled}
           arrayGrid={this.props.arrayGrid}
+          ennemyAttackMissed={this.props.ennemyAttackMissed}
+          ennemyAttackHit={this.props.ennemyAttackHit}
+          patrolBoatSunk={this.props.patrolBoatSunk}
+          submarineSunk={this.props.submarineSunk}
+          destroyerSunk={this.props.destroyerSunk}
+          battleshipSunk={this.props.battleshipSunk}
+          carrierSunk={this.props.carrierSunk}
+          iaTarget={this.props.iaTarget}
         />
         <EnnemyGrid
           isFilledEnnemy={this.props.isFilledEnnemy}

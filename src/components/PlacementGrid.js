@@ -19,9 +19,7 @@ class PlacementGrid extends Component {
                       onClick={() => {
                         this.props.handleClick(x, y)
                       }}
-                    >
-                      {console.log(this.props.isFilled(`${x}${y}`))}
-                    </div>
+                    ></div>
                   )
                 })}
               </div>
